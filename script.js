@@ -1,29 +1,11 @@
 let form = document.querySelector('body > header > div > div > div > div > form');
 let ul = document.querySelector('body > header > div > div > div > div > ul');
-let alli = document.querySelectorAll('i');
 
-alli.forEach(curr => {
-    
-    curr.addEventListener('click', e => {
-        curr.parentElement.remove();
-    });
-});
 
 let generateTemplate = (val) => {
-    let li = document.createElement('li');
-    li.innerText = val;
-    li.classList.add('list-group-item');
-    li.classList.add('bg-dark');
-    let i = document.createElement('i');
-    i.classList.add('fas');
-    i.classList.add('fa-trash');
-    i.classList.add('pointer');
-    li.innerText += " ";
-    li.append(i);
-    i.addEventListener('click', e=> {
-        i.parentElement.remove();
-    });
-    ul.append(li);
+
+    ul.innerHTML += `<li class="list-group-item bg-dark">${val} <i class="fas fa-trash pointer"></i></li>`;
+   
 }
 
 form.addEventListener('submit', e => {
@@ -34,5 +16,11 @@ form.addEventListener('submit', e => {
     }
     else{
         generateTemplate(e.target.addtodo.value);
+    }
+});
+
+ul.addEventListener('click', e => {
+    if(e.target.classList.contains('fa-trash')){
+        e.target.parentElement.remove();
     }
 });
